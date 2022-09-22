@@ -2,7 +2,7 @@ import random
 import urllib
 import requests
 from threading import Thread
-import telebot
+import telebot,time
 bot = telebot.TeleBot("5646538976:AAF6omrF5fue3hUw1taQ5B1c-Qlong_OP88")
 @bot.message_handler(commands=['start']) 
 def start(msg):
@@ -63,8 +63,9 @@ def main(msg):
 	if text[0] == "رشق":
 		link1 = text[1]
 		bot.reply_to(msg,"سيتم الرشق…",parse_mode="markdown")
-		for i in range(1000000):
+		for i in range(10000):
 		    try :
+		        time.sleep(1)
 		        th = Thread(target=send_seen, args=(
 		            link1.split("/")[3], link1.split("/")[4], random.choice(prox_list)))
 		        th.start()

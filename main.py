@@ -2,15 +2,18 @@ import random
 import urllib
 import requests
 from threading import Thread
-link1 = "https://t.me/B_2_V/172"
+import telebot
+bot = telebot.TeleBot("5646538976:AAF6omrF5fue3hUw1taQ5B1c-Qlong_OP88")
+@bot.message_handler(commands=['start']) 
+def start(msg):
+	bot.reply_to(msg,"هلا حبيبي اني بوت رشق مشاهدات تلي ! ، ارسل  `رشق (الرابط)` لرشق البوست . \n مثال : `رشق https://t.me/N_9_X/630`",parse_mode="markdown")
+
 views = 0
 https = requests.get("https://api.proxyscrape.com/?request=displayproxies&proxytype=https&timeout=0",
                      proxies=urllib.request.getproxies(), ).text
 http = requests.get("https://api.proxyscrape.com/?request=displayproxies&proxytype=http&timeout=0",
                     proxies=urllib.request.getproxies(), ).text
 prox_list = (https+http).split()
-
-
 def send_seen(channel, msgid, proxy):
     s = requests.Session()
     proxies = {'http': proxy, 'https': proxy}
@@ -51,11 +54,20 @@ def send_seen(channel, msgid, proxy):
     except Exception as e:
         return
 
-
-while True:
-    try :
-        th = Thread(target=send_seen, args=(
-            "B_2_V", "172", random.choice(prox_list)))
-        th.start()
-    except:
-        pass
+@bot.message_handler(func=lambda message: True)
+def main(msg):
+	try :
+		text = msg.text.split()
+	except :
+		return
+	if text[0] == "رشق":
+		link1 = text[1]
+		bot.reply_to(msg,"سيتم الرشق…",parse_mode="markdown")
+		for i in range(100000):
+		    try :
+		        th = Thread(target=send_seen, args=(
+		            link1.split("/")[3], link1.split("/")[4], random.choice(prox_list)))
+		        th.start()
+		    except:
+		        pass
+bot.polling()

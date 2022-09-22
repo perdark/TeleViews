@@ -63,7 +63,7 @@ def main(msg):
 	if text[0] == "رشق":
 		link1 = text[1]
 		bot.reply_to(msg,"سيتم الرشق…",parse_mode="markdown")
-		for i in range(1000):
+		for i in range(100000):
 		    try :
 		        time.sleep(0.1)
 		        th = Thread(target=send_seen, args=(

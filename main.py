@@ -63,11 +63,12 @@ def main(msg):
 	if text[0] == "رشق":
 		link1 = text[1]
 		bot.reply_to(msg,"سيتم الرشق…",parse_mode="markdown")
-		for i in range(100000):
+		for i in range(1000000):
 		    try :
 		        th = Thread(target=send_seen, args=(
 		            link1.split("/")[3], link1.split("/")[4], random.choice(prox_list)))
 		        th.start()
 		    except:
 		        pass
+		bot.reply_to(msg,"تم الانتهاء من الرشق")
 bot.polling()

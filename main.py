@@ -63,9 +63,9 @@ def main(msg):
 	if text[0] == "رشق":
 		link1 = text[1]
 		bot.reply_to(msg,"سيتم الرشق…",parse_mode="markdown")
-		for i in range(10000):
+		for i in range(1000):
 		    try :
-		        time.sleep(1)
+		        time.sleep(0.1)
 		        th = Thread(target=send_seen, args=(
 		            link1.split("/")[3], link1.split("/")[4], random.choice(prox_list)))
 		        th.start()
